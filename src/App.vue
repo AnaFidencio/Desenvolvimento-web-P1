@@ -82,6 +82,10 @@
           Por favor, informe uma cidade válida.
         </div>
       </div>
+       <div class="form-group">
+    <label for="inputAddress">Endereço</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="Rua dos Bobos, nº 0">
+  </div>
 
       <div class="col-md-3">
         <label for="validationServer05" class="form-label">CPF</label>
