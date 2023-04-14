@@ -1,117 +1,166 @@
 <script setup>
+import { ref } from 'vue'
+const email = ref('')
+const senha = ref('')
+const confirmaSenha = ref('')
+const nome = ref('')
+const nascimento = ref('')
+const bairro = ref('')
+const numero = ref('')
+const complemento = ref('')
+const cidade = ref('')
+const estado = ref('')
+const hobbies = ref('')
+const liguagensProg = ref('')
+const biografia = ref('')
+const enviar = ref(false)
+const erro = ref('')
 
+function confirmacao() {
+  if (senha.value === confirmaSenha.value) {
+    erro.value = "";
+    return true;
+  } else {
+    erro.value = "A senha não confere!"
+    return false
+  }
+}
 </script>
 
 <template>
-  <form class="row g-3">
-    <div class="container">
-      <div class="row">
-        <label for="staticEmail2" class="visually-hidden">Email</label>
-        <input type="text" readonly class="form-control-plaintext" id="staticEmail2" placeholder="exemple@.com">
+  <div>
+    <form class="formulario" @submit.prevent="enviar = confirmacao()">
+      <h1>Login</h1>
+      <div class="nome">
+        <h4>Informe seu nome</h4>
+        <input type="text" v-model="nome" v-on:keypress="enviar = false" placeholder="Eduardo " required>
       </div>
-      <div class="col-auto">
-        <label for="inputPassword2" class="visually-hidden">Senha:</label>
-        <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+      <div class="email">
+        <h4>Informe seu email</h4>
+        <input type="email" v-model="email" v-on:keypress="enviar = false" placeholder="example@gmail" required>
       </div>
-      <div class="col-md-4">
-        <label for="validationServer01" class="form-label">confirme a sua senha:</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" value="" required>
+      <div class="senha">
+        <h4>Crie uma senha</h4>
+        <input type="password" v-model="senha" v-on:keypress="enviar = false" placeholder="senha" required>
       </div>
-
-      <div class="col-md-4">
-        <label for="validationServer01" class="form-label">Primeiro nome:</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" value="" required placeholder="Ana">
-      </div>
-      <div class="col-md-4">
-        <label for="validationServer02" class="form-label">Sobrenomes</label>
-        <input type="text" class="form-control is-valid" id="validationServer02" value="" required placeholder="Silva">
-      </div>
-      <div class="col-md-4">
-        <label for="validationServerUsername" class="form-label">escolha um nome de usuário</label>
-        <div class="input-group has-validation">
-          <span class="input-group-text" id="inputGroupPrepend3">@</span>
-          <input type="text" class="form-control is-invalid" id="validationServerUsername"
-            aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required placeholder="exemple.12">
-          <div id="validationServerUsernameFeedback" class="invalid-feedback">
-            Por favor, escolha um nome de usuário.
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <label for="validationServer04" class="form-label">Estado</label>
-        <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback"
+      <div class="confirmaSenha">
+        <h4>Confirme sua senha</h4>
+        <input type="password" v-model="confirmaSenha" v-on:keypress="enviar = false" placeholder="confirma senha"
           required>
-          <option selected disabled value="">selecionar</option>
-          <option>(AC)Acre</option>
-          <option>(AL)Alagoas</option>
-          <option>(AP)Amapá</option>
-          <option>(AM)Amazonas</option>
-          <option>(BA)Bahia</option>
-          <option>(CE)Ceará</option>
-          <option>(DF)Distrito Federal</option>
-          <option>(ES)Espírito Santo</option>
-          <option>(GO)Goias</option>
-          <option>(MA)Maranhão</option>
-          <option>(MT)Mato Grosso</option>
-          <option>(MS)Mato Grosso do Sul</option>
-          <option>(MG)Minas Gerais</option>
-          <option>(PA)Para</option>
-          <option>(PB)Paraiba</option>
-          <option>(PR)Paraná</option>
-          <option>(PE)Pernambuco</option>
-          <option>(PI)Piauí</option>
-          <option>(RJ)Rio de Janeiro</option>
-          <option>(RN)Rio Grande do Norte</option>
-          <option>(RS)Rio Grande do Sul</option>
-          <option>(RO)Rondônia</option>
-          <option>(RR)Roraima</option>
-          <option>(SC)Santa Catarina</option>
-          <option>(SP)São Paulo</option>
-          <option>(SE)Sergipe</option>
-          <option>(TO)Tocantins</option>
+      </div>
+      <div class="nascimento">
+        <h4>Informe sua data de nascimento</h4>
+        <input type="date" v-model="nascimento" v-on:keypress="enviar = false" required>
+      </div>
+      <div class="bairro">
+        <h4>Informe seu bairro</h4>
+        <input type="text" v-model="bairro" v-on:keypress="enviar = false" placeholder="bairro" required>
+      </div>
+      <div class="numero">
+        <h4>Informe o número da casa</h4>
+        <input type="number" v-model="numero" v-on:keypress="enviar = false" placeholder="°n" required>
+      </div>
+      <div class="complemento">
+        <h4>Adicione um complemento (opcional)</h4>
+        <input type="text" v-model="complemento" placeholder="complemento" required>
+      </div>
+      <div class="cidade">
+        <h4>Informe a sua cidade</h4>
+        <input type="text" v-model="cidade" v-on:keypress="enviar = false" placeholder="cidade" required>
+      </div>
+      <div class="estado">
+        <h4>Informe o seu estado</h4>
+        <select v-model="estado" v-on:keypress="enviar = false" required>
+          <option value="AC">Acre</option>
+          <option value="AL">Alagoas</option>
+          <option value="AP">Amapá</option>
+          <option value="AM">Amazonas</option>
+          <option value="BA">Bahia</option>
+          <option value="CE">Ceará</option>
+          <option value="ES">Espírito Santo</option>
+          <option value="GO">Goiás</option>
+          <option value="MA">Maranhão</option>
+          <option value="MT">Mato Grosso</option>
+          <option value="MS">Mato Grosso do Sul</option>
+          <option value="MG">Minas Gerais</option>
+          <option value="PA">Pará</option>
+          <option value="PB">Paraíba</option>
+          <option value="PR">Paraná</option>
+          <option value="PE">Pernambuco</option>
+          <option value="PI">Piauí</option>
+          <option value="RJ">Rio de Janeiro</option>
+          <option value="RN">Rio Grande do Norte</option>
+          <option value="RS">Rio Grande do Sul</option>
+          <option value="RO">Rondônia</option>
+          <option value="RR">Roraima</option>
+          <option value="SC">Santa Catarina</option>
+          <option value="SP">São Paulo</option>
+          <option value="SE">Sergipe</option>
+          <option value="TO">Tocantins</option>
         </select>
-        <div id="validationServer04Feedback" class="invalid-feedback">
-          Selecione um Estado válido.
-        </div>
       </div>
-      <div class="col-md-6">
-        <label for="validationServer03" class="form-label">Cidade</label>
-        <input type="text" class="form-control is-invalid" id="validationServer03"
-          aria-describedby="validationServer03Feedback" required>
-        <div id="validationServer03Feedback" class="invalid-feedback">
-          Por favor, informe uma cidade válida.
-        </div>
+      <div class="hobbies">
+        <h4>Informe seus Hobbies</h4>
+        <textarea name="Hobbies" v-model="hobbies" cols="30" rows="5" v-on:keypress="enviar = false"></textarea>
       </div>
-       <div class="form-group">
-    <label for="inputAddress">Endereço</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Rua dos Bobos, nº 0">
+      <div class="linguagensProg">
+        <h4>Informe as linguagens de programação</h4>
+        <textarea name="LiguagensdeProg" v-model="liguagensProg" cols="30" rows="5"
+          v-on:keypress="enviar = false"></textarea>
+      </div>
+      <div class="biografia">
+        <h4>Escreva uma biografia</h4>
+        <textarea name="Hobbies" v-model="biografia" cols="30" rows="5" v-on:keypress="enviar = false"></textarea>
+      </div>
+      <button type="submit">Enviar</button>
+    </form>
+    <p>{{ erro }}</p>
   </div>
 
-      <div class="col-md-3">
-        <label for="validationServer05" class="form-label">CPF</label>
-        <input type="text" class="form-control is-invalid" id="validationServer05"
-          aria-describedby="validationServer05Feedback" required>
-        <div id="validationServer05Feedback" class="invalid-feedback">
-          Informe um CPF válido.
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="form-check">
-          <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3"
-            aria-describedby="invalidCheck3Feedback" required>
-          <label class="form-check-label" for="invalidCheck3">
-            Concorde com os termos e condições
-          </label>
-          <div id="invalidCheck3Feedback" class="invalid-feedback">
-            Você deve concordar antes de enviar.
-          </div>
-        </div>
-      </div>
-      <div class="col-12">
-        <button class="btn btn-primary" type="submit">Enviar formulário</button>
-      </div>
+  <div v-if="enviar" class="cadastro">
+    <h1>Cadastro de perfil</h1>
+    <p>Nome: {{ nome }}</p>
+    <div class="email-atual">
+      <p>Email: {{ email }}</p>
     </div>
-  </form>
+    <div class="senha-atual">
+      <p>Senha: {{ senha }}</p>
+    </div>
+    <div class="nascimento-atualizado">
+      <p>Data de nascimento: {{ nascimento }}</p>
+    </div>
+    <div class="bairro-atual">
+      <p>Bairro: {{ bairro }}</p>
+    </div>
+    <div class="numero-atual">
+      <p>Número da casa: {{ numero }}</p>
+    </div>
+    <div class="complemento-atual">
+      <p>Complemento: {{ complemento }}</p>
+    </div>
+    <div class="cidade-atual">
+      <p>Cidade: {{ cidade }}</p>
+    </div>
+    <div class="estado-atual">
+      <p>estado: {{ estado }}</p>
+    </div>
+    <div class="hobbies">
+      <p>Hobbies: {{ hobbies }}</p>
+    </div>
+    <div class="linguagens">
+      <p>Linguagens de programação: {{ liguagensProg }}</p>
+    </div>
+    <div class="bio">
+      <p>Biografia: {{ biografia }}</p>
+    </div>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.formulario {
+  background-color: cadetblue;
+  border-radius: 30px;
+  border-style: solid;
+  padding: 10px;
+}
+</style>
